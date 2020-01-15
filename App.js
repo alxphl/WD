@@ -8,7 +8,8 @@ import {
   Text,
   StatusBar,
   Button,
-  Alert
+  Alert,
+  TouchableOpacity
 } from 'react-native';
 
 import {
@@ -29,22 +30,19 @@ const App: () => React$Node = () => {
   const [battleCoins,setBattleCoins]=useState(0);
 
   const BattleModeHandler = ()=>{
-  if(battleMode===true){
     setBattleMode(false);
     setCoins(coins+battleCoins);
     setBattleCoins(0);
      Alert.alert('Battle Mode Turn Off');
-  }
-  else{
-    setBattleMode(true);
-     Alert.alert('Battle Mode Turn On');
-  }
+     axios.get('https://localhost:44311/api/values').then(res=>{console.log(res)});
+
 }
 
 const AddBattleCoins= ()=>{
   if(coins>1){
  setBattleCoins(battleCoins+1);
  setCoins(coins-1);
+   setBattleMode(true);
   }
   else{
      Alert.alert('Please Add More Coins!');
@@ -72,19 +70,52 @@ const AddBattleCoins= ()=>{
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Battle Mode</Text>
               <Text style={styles.sectionDescription}/>
-                    <Button
-          title={battleMode? "Battle On, Coins: "+String(battleCoins):"Battle Off, Coins: "+String(battleCoins)}
-          color="red"
-          onPress={BattleModeHandler}
-        />
+         <TouchableOpacity
+   style={{
+       borderWidth:1,
+       borderColor:'rgba(255,0,0,0.2)',
+       backgroundColor:'rgba(255,0,0,0.9)',
+       alignItems:'center',
+       justifyContent:'center',
+       width:100,
+       height:100,
+       backgroundColor:'red',
+       borderRadius:50,
+       alignItems:'center',
+     }}
+       onPress={BattleModeHandler}
+ >
+     <View style={[styles.countContainer]}>
+         <Text style={[styles.countText]}>
+           {String(battleCoins)}
+          </Text>
+        </View>
+ </TouchableOpacity>
             </View>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Balance:</Text>
-                    <Button
-          title={String(coins)}
-          color="green"
-          onPress={AddBattleCoins}
-        />
+                     <TouchableOpacity
+   style={{
+       borderWidth:1,
+       borderColor:'rgba(255,0,0,0.2)',
+       backgroundColor:'rgba(255,0,0,0.9)',
+       alignItems:'center',
+       justifyContent:'center',
+       width:100,
+       height:100,
+       backgroundColor:'green',
+       borderRadius:50,
+       alignItems:'center',
+     }}
+       onPress={AddBattleCoins}
+ >
+     <View style={[styles.countContainer]}>
+         <Text style={[styles.countText]}>
+           {String(coins)}
+          </Text>
+        </View>
+ </TouchableOpacity>
+ 
             </View>
           </View>
         </ScrollView>
