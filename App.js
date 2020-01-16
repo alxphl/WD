@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import {request, PERMISSIONS} from 'react-native-permissions';
 import {
   SafeAreaView,
   StyleSheet,
@@ -9,7 +10,8 @@ import {
   StatusBar,
   Button,
   Alert,
-  TouchableOpacity
+  TouchableOpacity,
+  PermissionsAndroid
 } from 'react-native';
 
 import {
@@ -19,7 +21,15 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-
+async function getPermissions () {
+   const granted= await request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION);
+         if (granted === "granted") {
+      console.log('You can use the location '+granted);
+    } else {
+      console.log('location permission denied '+granted);
+    }
+}
+  
 
 const App: () => React$Node = () => {
 
@@ -28,15 +38,15 @@ const App: () => React$Node = () => {
   const [googleId,setGoogleId]=useState('');
   const [coins,setCoins]=useState(10);
   const [battleCoins,setBattleCoins]=useState(0);
-
+getPermissions();
   const BattleModeHandler = ()=>{
     setBattleMode(false);
     setCoins(coins+battleCoins);
     setBattleCoins(0);
-     Alert.alert('Battle Mode Turn Off');
-     axios.get('https://localhost:44311/api/values').then(res=>{console.log(res)});
-
-}
+   //  Alert.alert('Battle Mode Turn Off');
+ 
+    // axios.get('https://pokeapi.co/api/v2/pokemon/151').then(res=>{console.log(res)});
+  }
 
 const AddBattleCoins= ()=>{
   if(coins>1){
@@ -49,7 +59,8 @@ const AddBattleCoins= ()=>{
   }
 
 }
-  return (
+
+ return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
