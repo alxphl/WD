@@ -11,9 +11,9 @@ import {
   Button,
   Alert,
   TouchableOpacity,
-  PermissionsAndroid
 } from 'react-native';
 
+import Geolocation from '@react-native-community/geolocation';
 import {
   Header,
   LearnMoreLinks,
@@ -25,11 +25,16 @@ async function getPermissions () {
    const granted= await request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION);
          if (granted === "granted") {
       console.log('You can use the location '+granted);
+      findCoordinates();
     } else {
       console.log('location permission denied '+granted);
     }
 }
   
+ const findCoordinates = () => {
+	const location=	Geolocation.getCurrentPosition();
+console.log(location);
+	};
 
 const App: () => React$Node = () => {
 
