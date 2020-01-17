@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
-import axios from 'axios';
-import {request, PERMISSIONS} from 'react-native-permissions';
+import * as Axios from './components/Axios';
+import Permissions from './components/Permissions';
+import BalanceTouchable from './components/BalanceTouchable';
+import BattleModeTouchable from './components/BattleModeTouchable';
+import styles from './styles';
 import {
   SafeAreaView,
   StyleSheet,
@@ -21,15 +24,7 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-async function getPermissions () {
-   const granted= await request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION);
-         if (granted === "granted") {
-      console.log('You can use the location '+granted);
-      findCoordinates();
-    } else {
-      console.log('location permission denied '+granted);
-    }
-}
+
   
  const findCoordinates = () => {
    var options = {
@@ -61,14 +56,12 @@ const App: () => React$Node = () => {
   const [googleId,setGoogleId]=useState('');
   const [coins,setCoins]=useState(10);
   const [battleCoins,setBattleCoins]=useState(0);
-getPermissions();
+      Permissions();
   const BattleModeHandler = ()=>{
     setBattleMode(false);
     setCoins(coins+battleCoins);
     setBattleCoins(0);
    //  Alert.alert('Battle Mode Turn Off');
- 
-    // axios.get('https://pokeapi.co/api/v2/pokemon/151').then(res=>{console.log(res)});
   }
 
 const AddBattleCoins= ()=>{
@@ -98,103 +91,15 @@ const AddBattleCoins= ()=>{
           <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Welcome {user} to</Text>
                    <Text style={styles.sectionTitle}>  World Domination!</Text>
-            
             </View>
           <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Battle Mode</Text>
-              <Text style={styles.sectionDescription}/>
-         <TouchableOpacity
-   style={{
-       borderWidth:1,
-       borderColor:'rgba(255,0,0,0.2)',
-       backgroundColor:'rgba(255,0,0,0.9)',
-       alignItems:'center',
-       justifyContent:'center',
-       width:100,
-       height:100,
-       backgroundColor:'red',
-       borderRadius:50,
-       alignItems:'center',
-     }}
-       onPress={BattleModeHandler}
- >
-     <View style={[styles.countContainer]}>
-         <Text style={[styles.countText]}>
-           {String(battleCoins)}
-          </Text>
-        </View>
- </TouchableOpacity>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Balance:</Text>
-                     <TouchableOpacity
-   style={{
-       borderWidth:1,
-       borderColor:'rgba(255,0,0,0.2)',
-       backgroundColor:'rgba(255,0,0,0.9)',
-       alignItems:'center',
-       justifyContent:'center',
-       width:100,
-       height:100,
-       backgroundColor:'green',
-       borderRadius:50,
-       alignItems:'center',
-     }}
-       onPress={AddBattleCoins}
- >
-     <View style={[styles.countContainer]}>
-         <Text style={[styles.countText]}>
-           {String(coins)}
-          </Text>
-        </View>
- </TouchableOpacity>
- 
-            </View>
+        <BattleModeTouchable/>
+        <BalanceTouchable/>
           </View>
         </ScrollView>
       </SafeAreaView>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },                                        
-});
 
 export default App;
