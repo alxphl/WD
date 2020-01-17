@@ -30,31 +30,30 @@ const AddBattleCoins= ()=>{
  return (
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Balance:</Text>
-                    <TouchableOpacity
-                        style={{
-                        borderWidth:1,
-                        borderColor:'rgba(255,0,0,0.2)',
-                        backgroundColor:'rgba(255,0,0,0.9)',
-                        alignItems:'center',
-                        justifyContent:'center',
-                        width:100,
-                        height:100,
-                        backgroundColor:'green',
-                        borderRadius:50,
-                        alignItems:'center',
-                        }}
-                        onPress={AddBattleCoins}
-                    >
-                        <View style={[styles.countContainer]}>
-                            <Text style={[styles.countText]}>
-                                {String(Coins)}
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                borderWidth:1,
+                borderColor:'rgba(255,0,0,0.2)',
+                backgroundColor:'rgba(255,0,0,0.9)',
+                alignItems:'center',
+                justifyContent:'center',
+                width:100,
+                height:100,
+                backgroundColor:'green',
+                borderRadius:50,
+                alignItems:'center',
+                }}
+                onPress={AddBattleCoins}
+              >
+                <View style={[styles.countContainer]}>
+                  <Text style={[styles.countText]}>
+                    {String(Coins)}
+                  </Text>
+                </View>
+              </TouchableOpacity>
             </View>      
         );
 }
-//export default BalanceTouchable;
 
 const mapStateToProps = (state) => ( {
     PlayId: state.PlayId,
