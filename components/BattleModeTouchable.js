@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 import styles from '../styles';
+import * as actionCreators from '../store/actions/index';
 const BattleModeTouchable: (props) => React$Node = (props) => {
 
   const [coins,setCoins]=useState(10);
@@ -13,7 +15,12 @@ const BattleModeTouchable: (props) => React$Node = (props) => {
    //  Alert.alert('Battle Mode Turn Off');
   }
 
-
+   const {
+      PlayId,
+      Coins,
+      BattleCoins,
+      BattleMode,
+    } = props;
 
 
  return (
@@ -37,11 +44,25 @@ const BattleModeTouchable: (props) => React$Node = (props) => {
  >
      <View style={[styles.countContainer]}>
          <Text style={[styles.countText]}>
-           {String(battleCoins)}
+           {String(BattleCoins)}
           </Text>
         </View>
  </TouchableOpacity>
             </View>      
         );
 }
-export default BattleModeTouchable;
+
+const mapStateToProps = (state) => ( {
+    PlayId: state.PlayId,
+    Coins: state.Coins,
+    BattleCoins: state.BattleCoins,
+    BattleMode: state.BattleMode,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    onGetCoins: (val) => dispatch(actionCreators.getCoins(val)),
+    onGetBattleCoins: (val) => dispatch(actionCreators.getBattleCoins(val)),
+    onGetBattleMode: (val) => dispatch(actionCreators.getBattleMode(val)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BattleModeTouchable);

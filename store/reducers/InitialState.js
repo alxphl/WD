@@ -1,7 +1,7 @@
 const InitialState = {
     PlayId:'',
     Username: '',
-    Coins: 0,
+    Coins: 10,
     BattleCoins:0,
     BattleMode: false,
 };

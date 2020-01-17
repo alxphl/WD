@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
-import initialState from './initialState';
+import InitialState from './InitialState';
 
 
 
@@ -12,7 +12,7 @@ export const GET_BATTLE_COINS = 'GET_BATTLE_COINS';
 export const GET_BATTLE_MODE = 'GET_BATTLE_MODE';
 
 
-const MainReducer = (state = initialState, action) => {
+const MainReducer = (state = InitialState, action) => {
     switch (action.type) {
     case actionTypes.GET_PLAY_ID: return updateObject(state,
         { PlayId: action.playId });

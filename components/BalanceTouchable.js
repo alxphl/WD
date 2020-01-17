@@ -1,16 +1,25 @@
 import React, {useState} from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import { connect } from 'react-redux';
 import styles from '../styles';
+import * as actionCreators from '../store/actions/index';
 const BalanceTouchable: (props) => React$Node = (props) => {
 
-  const [coins,setCoins]=useState(10);
-  const [battleCoins,setBattleCoins]=useState(0);
-  const [battleMode,setBattleMode]=useState(false);
+const {
+      PlayId,
+      Coins,
+      BattleCoins,
+      BattleMode,
+      onGetBattleCoins,
+      onGetCoins,
+      onGetBattleMode,
+    } = props;
+
 const AddBattleCoins= ()=>{
-  if(coins>1){
- setBattleCoins(battleCoins+1);
- setCoins(coins-1);
-   setBattleMode(true);
+  if(Coins>1){
+ onGetBattleCoins(BattleCoins+1);
+ onGetCoins(Coins-1);
+   onGetBattleMode(true);
   }
   else{
      Alert.alert('Please Add More Coins!');
@@ -38,11 +47,26 @@ const AddBattleCoins= ()=>{
                     >
                         <View style={[styles.countContainer]}>
                             <Text style={[styles.countText]}>
-                                {String(coins)}
+                                {String(Coins)}
                             </Text>
                         </View>
                     </TouchableOpacity>
             </View>      
         );
 }
-export default BalanceTouchable;
+//export default BalanceTouchable;
+
+const mapStateToProps = (state) => ( {
+    PlayId: state.PlayId,
+    Coins: state.Coins,
+    BattleCoins: state.BattleCoins,
+    BattleMode: state.BattleMode,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    onGetCoins: (val) => dispatch(actionCreators.getCoins(val)),
+    onGetBattleCoins: (val) => dispatch(actionCreators.getBattleCoins(val)),
+    onGetBattleMode: (val) => dispatch(actionCreators.getBattleMode(val)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BalanceTouchable);

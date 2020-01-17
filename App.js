@@ -25,6 +25,13 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import {
+    createStore, combineReducers, applyMiddleware, compose,
+} from 'redux';
+import MainReducer from './store/reducers/MainReducer';
+
   
  const findCoordinates = () => {
    var options = {
@@ -75,9 +82,17 @@ const AddBattleCoins= ()=>{
   }
 
 }
+const logger = (store) => (next) => (action) => {
+    console.log('[Middleware] Dispatching', action);
+    const result = next(action);
+    console.log('[Middleware] next state', store);
+    return result;
+};
 
+const store = createStore(MainReducer,compose(applyMiddleware(logger,thunk)));
  return (
     <>
+      <Provider store={store}>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView
@@ -98,6 +113,7 @@ const AddBattleCoins= ()=>{
           </View>
         </ScrollView>
       </SafeAreaView>
+           </Provider>
     </>
   );
 };
