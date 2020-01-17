@@ -3,6 +3,7 @@ import * as Axios from './components/Axios';
 import * as Permissions from './components/Permissions';
 import BalanceTouchable from './components/BalanceTouchable';
 import BattleModeTouchable from './components/BattleModeTouchable';
+import User from './components/User';
 import styles from './styles';
 import { SafeAreaView, ScrollView, View, Text, StatusBar, TouchableOpacity } from 'react-native';
 import * as Location from './components/Location';
@@ -24,6 +25,7 @@ const logger = (store) => (next) => (action) => {
 };
 
 const store = createStore(MainReducer,compose(applyMiddleware(logger,thunk)));
+
  return (
     <>
       <Provider store={store}>
@@ -37,10 +39,7 @@ const store = createStore(MainReducer,compose(applyMiddleware(logger,thunk)));
               <Text style={styles.footer}>Engine: Hermes</Text>
             </View>
           )}
-          <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Welcome {user} to</Text>
-                   <Text style={styles.sectionTitle}>  World Domination!</Text>
-            </View>
+          <User/>
           <View style={styles.body}>
         <BattleModeTouchable/>
         <BalanceTouchable/>
