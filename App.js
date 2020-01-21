@@ -3,6 +3,7 @@ import * as Axios from './components/Axios';
 import * as Permissions from './components/Permissions';
 import BalanceTouchable from './components/BalanceTouchable';
 import BattleModeTouchable from './components/BattleModeTouchable';
+import Username from './components/Username';
 import User from './components/User';
 import Logger from './components/Logger';
 import styles from './styles';
@@ -12,7 +13,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import MainReducer from './store/reducers/MainReducer';
- 
+import Swiper from 'react-native-web-swiper';
 const App: () => React$Node = () => {
 
 Permissions.AccessFineLocation();
@@ -22,6 +23,9 @@ const store = createStore(MainReducer,compose(applyMiddleware(Logger,thunk)));
  return (
     <>
       <Provider store={store}>
+            <View style={styles.container}>
+      <Swiper>
+      <View style={[styles.slideContainer,styles.slide1]}>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView
@@ -32,14 +36,20 @@ const store = createStore(MainReducer,compose(applyMiddleware(Logger,thunk)));
               <Text style={styles.footer}>Engine: Hermes</Text>
             </View>
           )}
-          <User/>
+          <Username/>
           <View style={styles.body}>
         <BattleModeTouchable/>
         <BalanceTouchable/>
           </View>
         </ScrollView>
       </SafeAreaView>
-           </Provider>
+      </View>
+      <View>
+      <User/>
+      </View>
+      </Swiper>
+          </View>
+    </Provider>
     </>
   );
 };

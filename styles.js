@@ -36,6 +36,22 @@ const styles = StyleSheet.create({
     padding: 4,
     paddingRight: 12,
     textAlign: 'right',
+  },
+   container: {
+    flex: 1,
+  },
+  slideContainer: {
+    flex: 1,
+    
+  },
+  slide1: {
+    backgroundColor: 'rgba(0,0,0,0)',
+  },
+  slide2: {
+    backgroundColor: 'rgba(20,200,20,0.3)',
+  },
+  slide3: {
+    backgroundColor: 'rgba(200,20,20,0.3)',
   },                                        
 });
 

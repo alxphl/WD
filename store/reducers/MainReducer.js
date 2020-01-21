@@ -21,7 +21,7 @@ const MainReducer = (state = InitialState, action) => {
         { BattleMode: action.battleMode });
 
       case actionTypes.GET_LOCATION: return updateObject(state,
-        { BattleMode: action.location });
+        { Location: action.location });
 
     default: return state;
     }
