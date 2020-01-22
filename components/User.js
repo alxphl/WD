@@ -29,9 +29,9 @@ const {
     } = props;
 
  return (
-    <View style={styles.sectionContainer}>
-        <View> 
-            <View>
+    <View style={styles.slide}>
+        <View style={{alignItems:'center',justifyContent: "center"}}> 
+            <View style={styles.googleBackground}>
                 <Text>   {FirstName} {LastName}</Text>
                  <Text> {WorldDominationRank} place in Top Rating</Text>
             </View>

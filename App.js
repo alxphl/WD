@@ -3,7 +3,7 @@ import * as Axios from './components/Axios';
 import * as Permissions from './components/Permissions';
 import BalanceTouchable from './components/BalanceTouchable';
 import BattleModeTouchable from './components/BattleModeTouchable';
-import Username from './components/Username';
+//import Username from './components/Username';
 import User from './components/User';
 import Logger from './components/Logger';
 import styles from './styles';
@@ -25,7 +25,7 @@ const store = createStore(MainReducer,compose(applyMiddleware(Logger,thunk)));
       <Provider store={store}>
             <View style={styles.container}>
       <Swiper>
-      <View style={[styles.slideContainer,styles.slide1]}>
+      <View style={[styles.slideContainer,styles.slide]}>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView
@@ -36,7 +36,7 @@ const store = createStore(MainReducer,compose(applyMiddleware(Logger,thunk)));
               <Text style={styles.footer}>Engine: Hermes</Text>
             </View>
           )}
-          <Username/>
+
           <View style={styles.body}>
         <BattleModeTouchable/>
         <BalanceTouchable/>

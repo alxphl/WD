@@ -23,7 +23,7 @@ const BattleModeTouchable: (props) => React$Node = (props) => {
 
  return (
           <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Battle Mode</Text>
+              <Text style={styles.sectionTitle}>The Battle</Text>
               <Text style={styles.sectionDescription}/>
               <TouchableOpacity
                 style={{

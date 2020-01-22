@@ -29,7 +29,7 @@ const AddBattleCoins= ()=>{
 
  return (
             <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Balance:</Text>
+              <Text style={styles.sectionTitle}>The Bank</Text>
               <TouchableOpacity
                 style={{
                 borderWidth:1,
