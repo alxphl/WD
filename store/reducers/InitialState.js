@@ -15,7 +15,7 @@ const InitialState = {
     WorldDominationRank: 1,
     Tear: 'Platinum',
     Bank: 2500,
-    AutoBattleMode:'false',
+    AutoBattleMode: false,
 };
 
 export default InitialState;
