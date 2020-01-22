@@ -17,11 +17,14 @@ const MainReducer = (state = InitialState, action) => {
     case actionTypes.GET_BATTLE_COINS: return updateObject(state,
         { BattleCoins: action.battleCoins });
 
-      case actionTypes.GET_BATTLE_MODE: return updateObject(state,
+    case actionTypes.GET_BATTLE_MODE: return updateObject(state,
         { BattleMode: action.battleMode });
 
-      case actionTypes.GET_LOCATION: return updateObject(state,
+    case actionTypes.GET_LOCATION: return updateObject(state,
         { Location: action.location });
+
+    case actionTypes.GET_AUTO_BATTLE_MODE: return updateObject(state,
+        { AutoBattleMode: action.autoBattleMode });
 
     default: return state;
     }

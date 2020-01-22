@@ -78,6 +78,12 @@ export const getbank = (res) =>
         bank: res,
     });
 
+export const getautoBattleMode = (res) =>
+    ({
+        type: actionTypes.GET_AUTO_BATTLE_MODE,
+        autoBattleMode: res,
+    });
+
 export const getCoins = (res) => (dispatch) => dispatch(getcoins(res));
 
 export const getBattleCoins = (res) => (dispatch) => dispatch(getbattleCoins(res));
@@ -103,3 +109,5 @@ export const getWorldDominationRank = (res) => (dispatch) => dispatch(getworldDo
 export const getTear = (res) => (dispatch) => dispatch(gettear(res));
 
 export const getBank = (res) => (dispatch) => dispatch(getbank(res));
+
+export const getAutoBattleMode = (res) => (dispatch) => dispatch(getautoBattleMode(res));

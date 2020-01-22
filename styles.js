@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },        
    googleBackground: {
     backgroundColor: 'rgb(199, 199, 199)',
-    width: '60%',
+    width: '100%',
     height:'45%',
     alignItems: "center",
     textAlign:'auto'

@@ -11,5 +11,6 @@ getWinRate,
 getLostRate,
 getWorldDominationRank,
 getTear,
-getBank
+getBank,
+getAutoBattleMode
 } from './MainActions';

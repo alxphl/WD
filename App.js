@@ -3,7 +3,7 @@ import * as Axios from './components/Axios';
 import * as Permissions from './components/Permissions';
 import BalanceTouchable from './components/BalanceTouchable';
 import BattleModeTouchable from './components/BattleModeTouchable';
-//import Username from './components/Username';
+import ToggleSwitcher from './components/ToggleSwitcher';
 import User from './components/User';
 import Logger from './components/Logger';
 import styles from './styles';
@@ -36,8 +36,8 @@ const store = createStore(MainReducer,compose(applyMiddleware(Logger,thunk)));
               <Text style={styles.footer}>Engine: Hermes</Text>
             </View>
           )}
-
           <View style={styles.body}>
+       <ToggleSwitcher/>
         <BattleModeTouchable/>
         <BalanceTouchable/>
           </View>
