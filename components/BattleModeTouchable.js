@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import Pulse from 'react-native-pulse';
 import * as actionCreators from '../store/actions/index';
 import styles from '../styles';
 
@@ -40,6 +41,7 @@ const BattleModeTouchable: (props) => React$Node = (props) => {
                 }}
                 onPress={BattleModeHandler}
               >
+              { BattleMode ? <Pulse color='orange' numPulses={3} diameter={100} speed={20} duration={100} /> : null }
                 <View style={[styles.countContainer]}>
                   <Text style={[styles.countText]}>
                     {String(BattleCoins)}
