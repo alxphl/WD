@@ -26,6 +26,7 @@ class Authenticate extends React.Component{
   WorldDominationRank, onGetWorldDominationRank,
   Tear, onGetTear,
   Bank, onGetBank,
+  BattleMode, onGetBattleMode,
   } = this.props
 
   var user= await Axios.SignUp(PlayId);
@@ -35,13 +36,14 @@ class Authenticate extends React.Component{
  onGetWorldDominationRank(user.worldDominationRank);
  onGetTear(user.tear);
  onGetBank(user.bank);
+ onGetBattleMode(user.battleMode);
+ onGetAutoBattleMode(user.autoBattleMode);
 }
 
 render(){
 return ( <View></View>)
+  }
 }
-
- }
 
 
 const mapStateToProps = (state) => ( {

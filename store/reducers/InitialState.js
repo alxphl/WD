@@ -1,5 +1,5 @@
 const InitialState = {
-    PlayId:'fdsafasdfadfasdfasd',
+    PlayId:'fdsafasdfadfafvdsagfsdfasd',
     Username: 'Alx',
     Coins: 0,
     BattleCoins:0,
