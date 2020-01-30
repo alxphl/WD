@@ -1,11 +1,39 @@
 import axios from 'axios';
 
-const ApiPath='https://pokeapi.co/api/v2/pokemon/151';
+const ApiPath='http://10.0.2.2/api/';
 
-export const Get= ()=>{
- axios.get(ApiPath).then(res=>{console.log(res)});
+export const Get=async ()=>{
+
+
+//await fetch(ApiPath).then(res=>{console.log("res:"+res)});
+
+
+ await  axios.get(ApiPath+"User").then(res=>{console.log("res:"+res.data)}).catch(error => {
+    console.log("Error:"+error)
+})
   }
 
-export const Post= (value)=>{
- axios.get(ApiPath+value).then(res=>{console.log(res)});
+export const Post=async ()=>{
+   axios.post(ApiPath+"/signup",{'username':'AlxPhl','PlayId':'59ab607c-33d8-4d4d-ad2d-48a660c75575'}).then(res=>{console.log(res.data)}).catch(error => {
+    console.log(error.response)
+})
+
   }
+
+export const  SignUp=async (playId)=>{
+
+ const response =await axios.post(ApiPath+"User/"+playId);
+ console.log(response.data);
+ console.log("PATH    :       "+ApiPath+"User/"+playId);
+ return response.data;
+
+}
+
+
+export const  SignIn = (playId)=>{
+
+const response= axios.post(ApiPath+"User/signup",{'PlayId':playId});
+return response;
+}
+
+

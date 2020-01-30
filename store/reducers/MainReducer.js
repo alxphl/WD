@@ -26,6 +26,21 @@ const MainReducer = (state = InitialState, action) => {
     case actionTypes.GET_AUTO_BATTLE_MODE: return updateObject(state,
         { AutoBattleMode: action.autoBattleMode });
 
+    case actionTypes.GET_WIN_RATE: return updateObject(state,
+        { WinRate: action.winRate });
+
+    case actionTypes.GET_LOST_RATE: return updateObject(state,
+        { LostRate: action.lostRate });
+
+    case actionTypes.GET_WORLD_DOMINATION_RANK: return updateObject(state,
+        { WorldDominationRank: action.worldDominationRank });
+
+    case actionTypes.GET_TEAR: return updateObject(state,
+        { Tear: action.tear });
+
+    case actionTypes.GET_BANK: return updateObject(state,
+        { Bank: action.bank });
+
     default: return state;
     }
 };

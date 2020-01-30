@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Pulse from 'react-native-pulse';
 import * as actionCreators from '../store/actions/index';
 import styles from '../styles';
-
+import * as Axios from './Axios';
 const BattleModeTouchable: (props) => React$Node = (props) => {
    const {
       PlayId,
@@ -16,10 +16,14 @@ const BattleModeTouchable: (props) => React$Node = (props) => {
       onGetBattleCoins,
     } = props;
 
- const BattleModeHandler = ()=>{
+ const BattleModeHandler =async ()=>{
     onGetBattleMode(false);
     onGetCoins(Coins+BattleCoins);
     onGetBattleCoins(0);
+    //Axios.Get();
+//var user= await Axios.SignUp(PlayId);
+
+ //onGetCoins(user.coins);
   }
 
  return (

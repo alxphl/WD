@@ -11,6 +11,7 @@ import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
 import MainReducer from './store/reducers/MainReducer';
 import Swiper from 'react-native-web-swiper';
+import Authenticate from './components/Authenticate';
 
 const App: () => React$Node = () => {
 
@@ -21,6 +22,7 @@ const store = createStore(MainReducer,compose(applyMiddleware(Logger,thunk)));
  return (
   <Provider store={store}>
     <View style={styles.container}>
+    <Authenticate/>
       <Swiper from={1} >
         <View>
           <Top100/>

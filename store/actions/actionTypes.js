@@ -7,6 +7,7 @@ export const GET_USERNAME = 'GET_USERNAME';
 export const GET_FIRST_NAME='GET_FIRST_NAME';
 export const GET_LAST_NAME='GET_LAST_NAME';
 export const GET_WIN_RATE='GET_WIN_RATE';
+export const GET_LOST_RATE='GET_LOST_RATE';
 export const GET_WORLD_DOMINATION_RANK='GET_WORLD_DOMINATION_RANK';
 export const GET_TEAR='GET_TEAR';
 export const GET_BANK='GET_BANK';
