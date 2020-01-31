@@ -1,4 +1,4 @@
-import React,{Component, ComponentDidMount} from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import * as actionCreators from '../store/actions/index';

@@ -20,7 +20,7 @@ export const getbattleMode = (res) =>
 
 export const getlocation = (res) =>
     ({
-        type: actionTypes.GET_BATTLE_MODE,
+        type: actionTypes.GET_LOCATION,
         location: res,
     });
     

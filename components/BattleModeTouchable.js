@@ -5,6 +5,7 @@ import Pulse from 'react-native-pulse';
 import * as actionCreators from '../store/actions/index';
 import styles from '../styles';
 import * as Axios from './Axios';
+import  CurrentLocation from './CurrentLocation';
 const BattleModeTouchable: (props) => React$Node = (props) => {
    const {
       PlayId,
@@ -14,22 +15,27 @@ const BattleModeTouchable: (props) => React$Node = (props) => {
       onGetBattleMode,
       onGetCoins,
       onGetBattleCoins,
+      Location,
     } = props;
 
  const BattleModeHandler =async ()=>{
-    onGetBattleMode(false);
-    onGetCoins(Coins+BattleCoins);
-    onGetBattleCoins(0);
-    //Axios.Get();
-//var user= await Axios.SignUp(PlayId);
+    //onGetBattleMode(false);
+   // onGetCoins(Coins+BattleCoins);
+   // onGetBattleCoins(0);
+var user= await Axios.BattleModeHandler(PlayId,BattleCoins,BattleMode,Location);
+//console.log("USER AFTER BATTLE MODE      :" + user)
 
- //onGetCoins(user.coins);
+    //onGetCoins(user.coins);
+    //onGetBattleCoins(user.battleCoins);
+   // onGetBattleMode(user.battleMode);
+    
   }
 
  return (
           <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>The Battle</Text>
               <Text style={styles.sectionDescription}/>
+              <CurrentLocation/>
               <TouchableOpacity
                 style={{
                 borderWidth:1,
@@ -61,12 +67,14 @@ const mapStateToProps = (state) => ( {
     Coins: state.Coins,
     BattleCoins: state.BattleCoins,
     BattleMode: state.BattleMode,
+    Location:state.Location,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     onGetCoins: (val) => dispatch(actionCreators.getCoins(val)),
     onGetBattleCoins: (val) => dispatch(actionCreators.getBattleCoins(val)),
     onGetBattleMode: (val) => dispatch(actionCreators.getBattleMode(val)),
+    onGetLocation: (val) => dispatch(actionCreators.getLocation(val)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BattleModeTouchable);

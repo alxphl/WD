@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import * as actionCreators from '../store/actions/index';
-import * as Location from './Location';
 import styles from '../styles';
 
 const User: (props) => React$Node = (props) => {
