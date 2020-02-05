@@ -11,11 +11,17 @@ const MainReducer = (state = InitialState, action) => {
     case actionTypes.GET_USERNAME: return updateObject(state,
         { Username:action.username });
 
-    case actionTypes.GET_COINS: return updateObject(state,
-        { Coins: action.coins });
+    case actionTypes.GET_LIFE: return updateObject(state,
+        { Life: action.life });
 
-    case actionTypes.GET_BATTLE_COINS: return updateObject(state,
-        { BattleCoins: action.battleCoins });
+    case actionTypes.GET_BATTLE_LIFE: return updateObject(state,
+        { BattleLife: action.battleLife });
+
+    case actionTypes.GET_STRENGTH: return updateObject(state,
+        { Strength: action.strength });
+
+    case actionTypes.GET_BATTLE_STRENGTH: return updateObject(state,
+        { BattleStrength: action.battleStrength });
 
     case actionTypes.GET_BATTLE_MODE: return updateObject(state,
         { BattleMode: action.battleMode });

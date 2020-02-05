@@ -30,9 +30,9 @@ export const  SignUp=async (playId)=>{
 }
 
 
-export const  BattleModeHandler = async (playId,battleCoins,battleMode,location)=>{
+export const  BattleModeHandler = async (playId,battleLife,battleStrength,battleMode,location)=>{
 
-const response= await axios.post(ApiPath+"Battle/BattleMode",{"PlayId":playId, "BattleCoins":battleCoins, "BattleMode":battleMode, "Location":location});
+const response= await axios.post(ApiPath+"Battle/BattleMode",{"PlayId":playId, "BattleLife":battleLife, "BattleStrength":battleStrength, "BattleMode":battleMode, "Location":location});
  console.log(response.data);
  console.log("PATH    :       "+ApiPath+"Battle/BattleMode");
  return response.data;

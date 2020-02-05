@@ -18,8 +18,10 @@ class Authenticate extends React.Component{
   PlayId, onGetPlayId,
   FirstName, onGetFirstName,
   LastName, onGetLastName,
-  Coins, onGetCoins,
-  BattleCoins, onGetBattleCoins,
+  Life, onGetLife,
+  BattleLife, onGetBattleLife,
+  Strength, onGetStrength,
+  BattleStrength, onGetBattleStrength,
   Location, onGetLocation,
   WinRate, onGetWinRate,
   LostRate, onGetLostRate,
@@ -30,7 +32,8 @@ class Authenticate extends React.Component{
   } = this.props
 
   var user= await Axios.SignUp(PlayId);
- onGetCoins(user.coins);
+ onGetLife(user.life);
+ onGetStrength(user.strength);
  onGetWinRate(user.winRate);
  onGetLostRate(user.lostRate);
  onGetWorldDominationRank(user.worldDominationRank);
@@ -48,12 +51,14 @@ return ( <View></View>)
 
 const mapStateToProps = (state) => ( {
     AutoBattleMode: state.AutoBattleMode,
-    PlayId:state.PlayId,
-    FirstName:state.FirstName,
-    LastName:state.LastName,
-    Coins:state.Coins,
-    BattleCoins:state.BattleCoins,
-    Location:state.Location,
+    PlayId: state.PlayId,
+    FirstName: state.FirstName,
+    LastName: state.LastName,
+    Life:state.Life,
+    BattleLife:state.BattleLife,
+    Strength: state.Strength,
+    BattleStrength: state.BattleStrength,
+    Location: state.Location,
     WinRate: state.WinRate,
     LostRate: state.LostRate,
     WorldDominationRank: state.WorldDominationRank,
@@ -64,8 +69,10 @@ const mapDispatchToProps = (dispatch) => ({
     onGetAutoBattleMode: (val) => dispatch(actionCreators.getAutoBattleMode(val)),
     onGetFirstName: (val) => dispatch(actionCreators.getFirstName(val)),
     onGetLastName: (val) => dispatch(actionCreators.getLastName(val)),
-    onGetCoins: (val) => dispatch(actionCreators.getCoins(val)),
-    onGetBattleCoins: (val) => dispatch(actionCreators.getBattleCoins(val)),
+    onGetLife: (val) => dispatch(actionCreators.getLife(val)),
+    onGetBattleLife: (val) => dispatch(actionCreators.getBattleLife(val)),
+    onGetStrength: (val) => dispatch(actionCreators.getStrength(val)),
+    onGetBattleStrength: (val) => dispatch(actionCreators.getBattleStrength(val)),
     onGetLocation: (val) => dispatch(actionCreators.getLocation(val)),
     onGetWinRate: (val) => dispatch(actionCreators.getWinRate(val)),
     onGetLostRate: (val) => dispatch(actionCreators.getLostRate(val)),

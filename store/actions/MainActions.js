@@ -1,15 +1,27 @@
 import * as actionTypes from './actionTypes';
 
-export const getcoins = (res) =>
+export const getlife = (res) =>
     ({
-        type: actionTypes.GET_COINS,
-        coins: res,
+        type: actionTypes.GET_LIFE,
+        life: res,
     });
 
-export const getbattleCoins = (res) =>
+export const getbattleLife = (res) =>
     ({
-        type: actionTypes.GET_BATTLE_COINS,
-        battleCoins: res,
+        type: actionTypes.GET_BATTLE_LIFE,
+        battleLife: res,
+    });
+
+export const getstrength = (res) =>
+    ({
+        type: actionTypes.GET_STRENGTH,
+        strength: res,
+    });
+
+export const getbattleStrength = (res) =>
+    ({
+        type: actionTypes.GET_BATTLE_STRENGTH,
+        battleStrength: res,
     });
 
 export const getbattleMode = (res) =>
@@ -84,9 +96,13 @@ export const getautoBattleMode = (res) =>
         autoBattleMode: res,
     });
 
-export const getCoins = (res) => (dispatch) => dispatch(getcoins(res));
+export const getLife = (res) => (dispatch) => dispatch(getlife(res));
 
-export const getBattleCoins = (res) => (dispatch) => dispatch(getbattleCoins(res));
+export const getBattleLife = (res) => (dispatch) => dispatch(getbattleLife(res));
+
+export const getStrength = (res) => (dispatch) => dispatch(getstrength(res));
+
+export const getBattleStrength = (res) => (dispatch) => dispatch(getbattleStrength(res));
 
 export const getBattleMode = (res) => (dispatch) => dispatch(getbattleMode(res));
 

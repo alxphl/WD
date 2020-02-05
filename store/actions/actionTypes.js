@@ -1,5 +1,7 @@
-export const GET_COINS = 'GET_COINS';
-export const GET_BATTLE_COINS = 'GET_BATTLE_COINS';
+export const GET_LIFE = 'GET_LIFE';
+export const GET_BATTLE_LIFE = 'GET_BATTLE_LIFE';
+export const GET_STRENGTH = 'GET_STRENGTH';
+export const GET_BATTLE_STRENGTH = 'GET_BATTLE_STRENGTH';
 export const GET_BATTLE_MODE = 'GET_BATTLE_MODE';
 export const GET_LOCATION='GET_LOCATION';
 export const GET_PLAY_ID = 'GET_PLAY_ID';

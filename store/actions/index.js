@@ -1,6 +1,8 @@
 export {
-getCoins,
-getBattleCoins,
+getLife,
+getBattleLife,
+getStrength,
+getBattleStrength,
 getBattleMode,
 getLocation,
 getPlayId,

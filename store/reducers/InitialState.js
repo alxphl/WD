@@ -1,8 +1,10 @@
 const InitialState = {
-    PlayId:'fdsafasdfadfafvdsagfsdfasd',
+    PlayId:'fsadfas213dfasdf',
     Username: 'Alx',
-    Coins: 0,
-    BattleCoins:0,
+    Life: 0,
+    BattleLife:0,
+    Strength: 0,
+    BattleStrength:0,
     BattleMode: false,
     Location:{
         Latitude:0,
