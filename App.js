@@ -9,6 +9,7 @@ import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
+import SignalR from './components/SignalR';
 import MainReducer from './store/reducers/MainReducer';
 import Swiper from 'react-native-web-swiper';
 import Authenticate from './components/Authenticate';
@@ -23,6 +24,7 @@ const store = createStore(MainReducer,compose(applyMiddleware(Logger,thunk)));
   <Provider store={store}>
     <View style={styles.container}>
     <Authenticate/>
+    <SignalR/>
       <Swiper from={1} >
         <View>
           <Top100/>
