@@ -24,7 +24,7 @@ const store = createStore(MainReducer,compose(applyMiddleware(Logger,thunk)));
   <Provider store={store}>
     <View style={styles.container}>
     <Authenticate/>
-    <SignalR/>
+
       <Swiper from={1} >
         <View>
           <Top100/>

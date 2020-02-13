@@ -9,6 +9,11 @@ class SignalR extends Component {
       playId: 'fsadfas213dfasdf',
       battleLife: 50,
       battleStrength: 50,
+      battleMode:true,
+      location:{
+        longitude:100,
+        latitude:100
+      }
     };
   }
   componentDidMount() {
@@ -18,7 +23,7 @@ class SignalR extends Component {
       .configureLogging(signalR.LogLevel.Debug)
       .build();
 
-    const {playId, battleLife, battleStrength} = this.state;
+    const {playId, battleLife, battleStrength,battleMode,location} = this.state;
 
     connectionHub
     .start()
@@ -30,7 +35,7 @@ class SignalR extends Component {
       const messages = this.state.messages.concat([text]);
       this.setState({messages});
     });
-    setTimeout(()=>{connectionHub.invoke('BattleHandler',playId,battleLife,battleStrength).then((res)=>console.log(`SENDTOCHANNEL INVOKED!`+ res)); }, 3000);
+    setTimeout(()=>{connectionHub.invoke('BattleHandler',{playId,battleLife,battleStrength,battleMode,location}).then((res)=>console.log(`SENDTOCHANNEL INVOKED!`+ res.data)); }, 3000);
   }
   render() {
     return <View />;

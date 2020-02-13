@@ -5,6 +5,7 @@ import Pulse from 'react-native-pulse';
 import * as actionCreators from '../store/actions/index';
 import styles from '../styles';
 import * as Axios from './Axios';
+import * as SignalRHandler from './SignalRHandler';
 import  CurrentLocation from './CurrentLocation';
 const BattleModeTouchable: (props) => React$Node = (props) => {
    const [counter,setCounter]=useState(0);
@@ -28,7 +29,7 @@ const BattleModeTouchable: (props) => React$Node = (props) => {
     //onGetBattleMode(false);
     //onGetCoins(Coins+BattleCoins);
    // onGetBattleCoins(0);
-var user= await Axios.BattleModeHandler(PlayId,BattleLife,BattleStrength,BattleMode,Location);
+var user= await SignalRHandler.BattleHandler(PlayId,BattleLife,BattleStrength,BattleMode,Location);
 //console.log("USER AFTER BATTLE MODE      :" + user)
 
     //onGetCoins(user.coins);
