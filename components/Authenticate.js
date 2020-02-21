@@ -18,6 +18,8 @@ class Authenticate extends React.Component {
   ManageUser = async () => {
     const {
       PlayId,
+      Token,
+      onGetToken,
       Life,
       onGetLife,
       Strength,
@@ -34,11 +36,9 @@ class Authenticate extends React.Component {
       onGetBank,
     } = this.props;
 
-    //var user = await SignalRHandler.UserHandler(PlayId); //Axios.SignUp(PlayId);
-    //console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!USER!!!!!! ::    ' + user);
-
+    //var user = await Axios.SignUp(PlayId);
     const connectionHub = new signalR.HubConnectionBuilder()
-      .withUrl(HubPath + 'user')
+      .withUrl(HubPath + 'user', {accessTokenFactory: () => Token})
       .configureLogging(signalR.LogLevel.Debug)
       .build();
     connectionHub
@@ -53,17 +53,12 @@ class Authenticate extends React.Component {
     });
     setTimeout(async () => {
       await connectionHub
-        .invoke('SignInUp', 'fsdfsdf', PlayId)
+        .invoke('SignInUp', PlayId)
         .then(res => console.log('SENDTOCHANNEL INVOKED!' + res.data));
     }, 3000);
 
     var User;
     connectionHub.on('UserFill', user => {
-      console.log(
-        '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!USER FROM USERFILL :    ' +
-          user.strength +
-          '     !!!!!!!!!!!!!!!!!!!',
-      );
       onGetLife(user.life);
       onGetStrength(user.strength);
       onGetWinRate(user.winRate);
@@ -71,6 +66,8 @@ class Authenticate extends React.Component {
       onGetWorldDominationRank(user.worldDominationRank);
       onGetTear(user.tear);
       onGetBank(user.bank);
+      onGetToken(user.token);
+      console.log('!!!!!!!!!!!!! TOKEN !!!!!!!!!!!!!!!! :     ' + Token);
       User = user;
     });
   };
@@ -95,6 +92,7 @@ const mapStateToProps = state => ({
   WorldDominationRank: state.WorldDominationRank,
   Tear: state.Tear,
   Bank: state.Bank,
+  Token: state.Token,
 });
 const mapDispatchToProps = dispatch => ({
   onGetAutoBattleMode: val => dispatch(actionCreators.getAutoBattleMode(val)),
@@ -111,6 +109,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreators.getWorldDominationRank(val)),
   onGetTear: val => dispatch(actionCreators.getTear(val)),
   onGetBank: val => dispatch(actionCreators.getBank(val)),
+  onGetToken: val => dispatch(actionCreators.getToken(val)),
   onGetPlayId: val => dispatch(actionCreators.getPlayId(val)),
   onGetBattleMode: val => dispatch(actionCreators.getBattleMode(val)),
 });

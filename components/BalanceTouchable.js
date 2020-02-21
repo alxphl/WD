@@ -1,15 +1,18 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Alert} from 'react-native';
 import {connect} from 'react-redux';
-import * as Axios from './Axios';
 import styles from '../styles';
 import * as actionCreators from '../store/actions/index';
 import * as SignalRHandler from './SignalRHandler';
+import * as signalR from '@aspnet/signalr';
+
+const HubPath = 'http://10.0.2.2/';
 
 const BalanceTouchable: props => React$Node = props => {
   const [counter, setCounter] = useState(0);
   const {
     PlayId,
+    Token,
     Life,
     BattleLife,
     onGetLife,
@@ -33,6 +36,46 @@ const BalanceTouchable: props => React$Node = props => {
     }
   };
 
+  const ManageBalances = async () => {
+    const connectionHub = new signalR.HubConnectionBuilder()
+      .withUrl(HubPath + 'battle', {accessTokenFactory: () => Token})
+      .configureLogging(signalR.LogLevel.Debug)
+      .build();
+    connectionHub
+      .start()
+      .then(() => console.log('Connection started!'))
+      .catch(err => console.log('Error while establishing connection', err));
+
+    connectionHub.on('BattleHandler', (nick, message) => {
+      const text = `${nick}: ${message}`;
+      const messages = this.state.messages.concat([text]);
+      this.setState({messages});
+    });
+    setTimeout(() => {
+      connectionHub
+        .invoke('BattleHandler', {
+          PlayId,
+          BattleLife,
+          BattleStrength,
+          BattleMode,
+          Location,
+        })
+        .then(res => console.log('SENDTOCHANNEL INVOKED!' + res.data));
+    }, 3000);
+
+    connectionHub.on('BattleStats', user => {
+      onGetLife(user.life);
+      onGetStrength(user.strength);
+      onGetBattleLife(user.battleLife);
+      onGetBattleStrength(user.battleStrength);
+      onGetWinRate(user.winRate);
+      onGetLostRate(user.lostRate);
+      onGetWorldDominationRank(user.worldDominationRank);
+      onGetTear(user.tear);
+      onGetBank(user.bank);
+    });
+  };
+
   const AddLifeToBattle = async () => {
     if (Life > 0) {
       onGetLife(Life - 1);
@@ -48,8 +91,7 @@ const BalanceTouchable: props => React$Node = props => {
         BattleMode,
         Location,
       );
-      console.log("USER RETURNED:  "+user);
- 
+      console.log('USER RETURNED:  ' + user);
     }
     setCounter(counter + 1);
   };
@@ -62,20 +104,24 @@ const BalanceTouchable: props => React$Node = props => {
       Alert.alert('Please Add More Strength!');
     }
     if (counter == 0 || counter % 5 == 0) {
-      var user = await SignalRHandler.BattleHandler(
+      /* var user = await SignalRHandler.BattleHandler(
         PlayId,
         BattleLife,
         BattleStrength,
         BattleMode,
         Location,
-      ).then(res=>console.log("!!!!!!!!!!!!!!!!!!!!!!RESPONSEEE!!!!!!!!!!!!!!             "+res))
-      
+      ).then(res =>
+        console.log(
+          '!!!!!!!!!!!!!!!!!!!!!!RESPONSEEE!!!!!!!!!!!!!!             ' + res,
+        ),
+
       onGetLife(user.Life);
       onGetBattleLife(user.BattleLife);
       onGetStrength(user.Strength);
-      onGetBattleStrength(user.BattleStrength);
+      onGetBattleStrength(user.BattleStrength);*/
+      ManageBalances();
     }
-    setCounter(counter + 1);
+    //  setCounter(counter + 1);
   };
 
   return (
