@@ -60,7 +60,7 @@ export const UserHandler = async (
   });
   setTimeout(async () => {
     await connectionHub
-      .invoke('SignInUp',"fsdfsdf", playId)
+      .invoke('SignInUp', playId)
       .then(res => console.log('SENDTOCHANNEL INVOKED!' + res.data));
   }, 3000);
 
