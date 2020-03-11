@@ -8,7 +8,7 @@ import * as signalR from '@aspnet/signalr';
 const HubPath = 'http://10.0.2.2/';
 
 const BalanceTouchable: props => React$Node = props => {
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(1);
   const {
     PlayId,
     Token,
@@ -20,30 +20,15 @@ const BalanceTouchable: props => React$Node = props => {
     BattleStrength,
     onGetStrength,
     onGetBattleStrength,
-    BattleMode,
     onGetBattleMode,
     Location,
-    onGetWinRate,
-    onGetLostRate,
-    onGetWorldDominationRank,
-    onGetTear,
-    onGetBank,
   } = props;
 
   const ManageBalances = async () => {
-    console.log(
-      '!!!!!!!!!!!!!!!!!!!! TOKEN SNED IS !!!!!!!!!!!!!!!!!!!!!!!!!!  TOKEN :' +
-        Token,
-    );
     const connectionHub = new signalR.HubConnectionBuilder()
-      .withUrl(
-        HubPath + 'battle',
-        {
-          accessTokenFactory: () => Token,
-        } /* {
-        'Authorization': 'Bearer ' + $Token
-      }*/,
-      )
+      .withUrl(HubPath + 'battle', {
+        accessTokenFactory: () => Token,
+      })
       .configureLogging(signalR.LogLevel.Debug)
       .build();
     connectionHub
@@ -56,28 +41,26 @@ const BalanceTouchable: props => React$Node = props => {
       const messages = this.state.messages.concat([text]);
       this.setState({messages});
     });
+    onGetBattleMode(true);
     setTimeout(() => {
       connectionHub
         .invoke('BattleHandler2', {
           PlayId,
           BattleLife,
           BattleStrength,
-          BattleMode,
+          BattleMode:true,
           Location,
         })
         .then(res => console.log('SENDTOCHANNEL INVOKED!' + res.data));
     }, 3000);
 
-    connectionHub.on('BattleStats', user => {
+    connectionHub.on('BattleFill', user => {
+      console.log(user);
       onGetLife(user.life);
       onGetStrength(user.strength);
       onGetBattleLife(user.battleLife);
       onGetBattleStrength(user.battleStrength);
-      onGetWinRate(user.winRate);
-      onGetLostRate(user.lostRate);
-      onGetWorldDominationRank(user.worldDominationRank);
-      onGetTear(user.tear);
-      onGetBank(user.bank);
+      onGetBattleMode(user.battleMode);
     });
   };
 

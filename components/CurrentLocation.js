@@ -11,7 +11,7 @@ class CurrentLocation extends React.Component {
   }
 
   ManageLocation = async () => {
-    const {Location, onGetLocation} = this.props;
+    const {onGetLocation} = this.props;
 
     var options = {
       enableHighAccuracy: true,
@@ -21,11 +21,6 @@ class CurrentLocation extends React.Component {
 
     function success(pos) {
       var crd = pos.coords;
-
-      console.log('Your current position is:');
-      console.log(`Latitude : ${crd.latitude}`);
-      console.log(`Longitude: ${crd.longitude}`);
-      console.log(`More or less ${crd.accuracy} meters.`);
       onGetLocation({Latitude: crd.latitude, Longitude: crd.longitude});
     }
 
