@@ -3,7 +3,6 @@ import {View, Text, TouchableOpacity, Alert} from 'react-native';
 import {connect} from 'react-redux';
 import styles from '../styles';
 import * as actionCreators from '../store/actions/index';
-import * as SignalRHandler from './SignalRHandler';
 import * as signalR from '@aspnet/signalr';
 
 const HubPath = 'http://10.0.2.2/';
@@ -24,21 +23,27 @@ const BalanceTouchable: props => React$Node = props => {
     BattleMode,
     onGetBattleMode,
     Location,
+    onGetWinRate,
+    onGetLostRate,
+    onGetWorldDominationRank,
+    onGetTear,
+    onGetBank,
   } = props;
 
-  const AddBattleCoins = () => {
-    if (Life > 1) {
-      onGetBattleLife(BattleLife + 1);
-      onGetLife(Life - 1);
-      onGetBattleMode(true);
-    } else {
-      Alert.alert('Please Add More Coins!');
-    }
-  };
-
   const ManageBalances = async () => {
+    console.log(
+      '!!!!!!!!!!!!!!!!!!!! TOKEN SNED IS !!!!!!!!!!!!!!!!!!!!!!!!!!  TOKEN :' +
+        Token,
+    );
     const connectionHub = new signalR.HubConnectionBuilder()
-      .withUrl(HubPath + 'battle', {accessTokenFactory: () => Token})
+      .withUrl(
+        HubPath + 'battle',
+        {
+          accessTokenFactory: () => Token,
+        } /* {
+        'Authorization': 'Bearer ' + $Token
+      }*/,
+      )
       .configureLogging(signalR.LogLevel.Debug)
       .build();
     connectionHub
@@ -53,7 +58,7 @@ const BalanceTouchable: props => React$Node = props => {
     });
     setTimeout(() => {
       connectionHub
-        .invoke('BattleHandler', {
+        .invoke('BattleHandler2', {
           PlayId,
           BattleLife,
           BattleStrength,
@@ -83,15 +88,8 @@ const BalanceTouchable: props => React$Node = props => {
     } else {
       Alert.alert('Please Add More Life!');
     }
-    if (counter == 0 || counter % 5 == 0) {
-      var user = await SignalRHandler.BattleHandler(
-        PlayId,
-        BattleLife,
-        BattleStrength,
-        BattleMode,
-        Location,
-      );
-      console.log('USER RETURNED:  ' + user);
+    if (counter === 0 || counter % 5 === 0) {
+      ManageBalances();
     }
     setCounter(counter + 1);
   };
@@ -103,65 +101,24 @@ const BalanceTouchable: props => React$Node = props => {
     } else {
       Alert.alert('Please Add More Strength!');
     }
-    if (counter == 0 || counter % 5 == 0) {
-      /* var user = await SignalRHandler.BattleHandler(
-        PlayId,
-        BattleLife,
-        BattleStrength,
-        BattleMode,
-        Location,
-      ).then(res =>
-        console.log(
-          '!!!!!!!!!!!!!!!!!!!!!!RESPONSEEE!!!!!!!!!!!!!!             ' + res,
-        ),
-
-      onGetLife(user.Life);
-      onGetBattleLife(user.BattleLife);
-      onGetStrength(user.Strength);
-      onGetBattleStrength(user.BattleStrength);*/
+    if (counter === 0 || counter % 5 === 0) {
       ManageBalances();
     }
-    //  setCounter(counter + 1);
   };
 
   return (
     <View style={styles.sectionContainer}>
       <Text style={styles.sectionTitle}>The Bank</Text>
-      <View style={{flex: 1, flexDirection: 'row'}}>
+      <View style={styles.TouchableView}>
         <TouchableOpacity
-          style={{
-            borderWidth: 1,
-            borderColor: 'rgba(255,0,0,0.2)',
-            backgroundColor: 'rgba(255,0,0,0.9)',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: 50,
-            height: 100,
-            backgroundColor: 'green',
-            borderBottomLeftRadius: 50,
-            borderTopLeftRadius: 50,
-
-            alignItems: 'center',
-          }}
+          style={styles.greenTouchable}
           onPress={AddLifeToBattle}>
           <View style={[styles.countContainer]}>
             <Text style={[styles.countText]}>{String(Life)}</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{
-            borderWidth: 1,
-            borderColor: 'rgba(255,0,0,0.2)',
-            backgroundColor: 'rgba(255,0,0,0.9)',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: 50,
-            height: 100,
-            backgroundColor: 'red',
-            borderBottomRightRadius: 50,
-            borderTopRightRadius: 50,
-            alignItems: 'center',
-          }}
+          style={styles.redTouchable}
           onPress={AddStrengthToBattle}>
           <View style={[styles.countContainer]}>
             <Text style={[styles.countText]}>{String(Strength)}</Text>
@@ -180,6 +137,7 @@ const mapStateToProps = state => ({
   BattleStrength: state.BattleStrength,
   BattleMode: state.BattleMode,
   Location: state.Location,
+  Token: state.Token,
 });
 
 const mapDispatchToProps = dispatch => ({

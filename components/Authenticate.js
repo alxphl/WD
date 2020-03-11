@@ -2,8 +2,6 @@ import React from 'react';
 import {View} from 'react-native';
 import {connect} from 'react-redux';
 import * as actionCreators from '../store/actions/index';
-import * as Axios from './Axios';
-import * as SignalRHandler from './SignalRHandler';
 import * as signalR from '@aspnet/signalr';
 
 const HubPath = 'http://10.0.2.2/';
@@ -20,19 +18,12 @@ class Authenticate extends React.Component {
       PlayId,
       Token,
       onGetToken,
-      Life,
       onGetLife,
-      Strength,
       onGetStrength,
-      WinRate,
       onGetWinRate,
-      LostRate,
       onGetLostRate,
-      WorldDominationRank,
       onGetWorldDominationRank,
-      Tear,
       onGetTear,
-      Bank,
       onGetBank,
     } = this.props;
 

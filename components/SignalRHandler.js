@@ -36,7 +36,6 @@ export const BattleHandler = async (
   }, 3000);
 };
 
-
 export const UserHandler = async (
   playId,
   battleLife,
@@ -65,13 +64,13 @@ export const UserHandler = async (
   }, 3000);
 
   var User;
-  connectionHub.on("UserFill" ,user=> {
+  connectionHub.on('UserFill', user => {
     console.log(
       '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!USER FROM USERFILL :    ' +
         user.wins +
         '     !!!!!!!!!!!!!!!!!!!',
     );
-    User=user;
+    User = user;
   });
   return User;
 };

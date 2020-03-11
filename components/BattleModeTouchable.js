@@ -86,21 +86,9 @@ const BattleModeTouchable: props => React$Node = props => {
       <Text style={styles.sectionTitle}>The Battle</Text>
       <Text style={styles.sectionDescription} />
       <CurrentLocation />
-      <View style={{flex: 1, flexDirection: 'row'}}>
+      <View style={styles.TouchableView}>
         <TouchableOpacity
-          style={{
-            borderWidth: 1,
-            borderColor: 'rgba(255,0,0,0.2)',
-            backgroundColor: 'rgba(255,0,0,0.9)',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: 50,
-            height: 100,
-            backgroundColor: 'green',
-            borderBottomLeftRadius: 50,
-            borderTopLeftRadius: 50,
-            alignItems: 'center',
-          }}
+          style={styles.greenTouchable}
           onPress={RemoveLifeFromBattle}>
           <View style={[styles.countContainer]}>
             <Text style={[styles.countText]}>{String(BattleLife)}</Text>
@@ -108,19 +96,7 @@ const BattleModeTouchable: props => React$Node = props => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={{
-            borderWidth: 1,
-            borderColor: 'rgba(255,0,0,0.2)',
-            backgroundColor: 'rgba(255,0,0,0.9)',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: 50,
-            height: 100,
-            backgroundColor: 'red',
-            borderBottomRightRadius: 50,
-            borderTopRightRadius: 50,
-            alignItems: 'center',
-          }}
+          style={styles.redTouchable}
           onPress={RemoveStrengthFromBattle}>
           <View style={[styles.countContainer]}>
             <Text style={[styles.countText]}>{String(BattleStrength)}</Text>
