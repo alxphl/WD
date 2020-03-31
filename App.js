@@ -5,43 +5,44 @@ import User from './components/User';
 import Top100 from './components/Top100';
 import Logger from './components/Logger';
 import styles from './styles';
-import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
-import { Provider } from 'react-redux';
+import {ScrollView, View} from 'react-native';
+import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
-import { createStore, applyMiddleware, compose } from 'redux';
-import SignalR from './components/SignalR';
+import {createStore, applyMiddleware, compose} from 'redux';
 import MainReducer from './store/reducers/MainReducer';
 import Swiper from 'react-native-web-swiper';
 import Authenticate from './components/Authenticate';
 
 const App: () => React$Node = () => {
+  Permissions.AccessFineLocation();
 
-Permissions.AccessFineLocation();
+  const store = createStore(
+    MainReducer,
+    compose(applyMiddleware(Logger, thunk)),
+  );
 
-const store = createStore(MainReducer,compose(applyMiddleware(Logger,thunk)));
+  return (
+    <Provider store={store}>
+      <View style={styles.container}>
+        <Authenticate />
 
- return (
-  <Provider store={store}>
-    <View style={styles.container}>
-    <Authenticate/>
-
-      <Swiper from={1} >
-        <View>
-          <Top100/>
-        </View>
-        <View style={[styles.slideContainer,styles.slide]}>
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            style={styles.scrollView}>
-           <Home/>
-          </ScrollView>
-        </View>
-        <View>
-          <User/>
-        </View>
-      </Swiper>
-    </View>
-  </Provider>
+        <Swiper from={1}>
+          <View>
+            <Top100 />
+          </View>
+          <View style={[styles.slideContainer, styles.slide]}>
+            <ScrollView
+              contentInsetAdjustmentBehavior="automatic"
+              style={styles.scrollView}>
+              <Home />
+            </ScrollView>
+          </View>
+          <View>
+            <User />
+          </View>
+        </Swiper>
+      </View>
+    </Provider>
   );
 };
 

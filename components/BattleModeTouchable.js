@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import Pulse from 'react-native-pulse';
 import * as actionCreators from '../store/actions/index';
 import styles from '../styles';
-import * as SignalRHandler from './SignalRHandler';
 import CurrentLocation from './CurrentLocation';
 import * as signalR from '@aspnet/signalr';
 
@@ -22,21 +21,10 @@ const BattleModeTouchable: props => React$Node = props => {
     BattleStrength,
     onGetStrength,
     onGetBattleStrength,
-    BattleMode,
     onGetBattleMode,
     Location,
     Token,
   } = props;
-
-  const BattleModeHandler = async () => {
-    var user = await SignalRHandler.BattleHandler(
-      PlayId,
-      BattleLife,
-      BattleStrength,
-      BattleMode,
-      Location,
-    );
-  };
 
   const ManageBalances = async battleMode => {
     const connectionHub = new signalR.HubConnectionBuilder()
@@ -61,7 +49,7 @@ const BattleModeTouchable: props => React$Node = props => {
           PlayId,
           BattleLife,
           BattleStrength,
-          BattleMode:false,
+          BattleMode: false,
           Location,
         })
         .then(res => console.log('SENDTOCHANNEL INVOKED!' + res.data));

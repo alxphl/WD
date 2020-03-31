@@ -7,7 +7,6 @@ import * as signalR from '@aspnet/signalr';
 const HubPath = 'http://10.0.2.2/';
 
 class Authenticate extends React.Component {
-  //const Authenticate: (props) => React$Node = (props) => {
   constructor(props) {
     super(props);
     this.ManageUser();
@@ -27,7 +26,6 @@ class Authenticate extends React.Component {
       onGetBank,
     } = this.props;
 
-    //var user = await Axios.SignUp(PlayId);
     const connectionHub = new signalR.HubConnectionBuilder()
       .withUrl(HubPath + 'user', {accessTokenFactory: () => Token})
       .configureLogging(signalR.LogLevel.Debug)
@@ -48,7 +46,6 @@ class Authenticate extends React.Component {
         .then(res => console.log('SENDTOCHANNEL INVOKED!' + res.data));
     }, 3000);
 
-    var User;
     connectionHub.on('UserFill', user => {
       onGetLife(user.life);
       onGetStrength(user.strength);
@@ -58,8 +55,6 @@ class Authenticate extends React.Component {
       onGetTear(user.tear);
       onGetBank(user.bank);
       onGetToken(user.token);
-      console.log('!!!!!!!!!!!!! TOKEN !!!!!!!!!!!!!!!! :     ' + Token);
-      User = user;
     });
   };
 

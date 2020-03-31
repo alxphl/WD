@@ -3,8 +3,6 @@ import axios from 'axios';
 const ApiPath = 'http://10.0.2.2/api/';
 
 export const Get = async () => {
-  //await fetch(ApiPath).then(res=>{console.log("res:"+res)});
-
   await axios
     .get(ApiPath + 'User')
     .then(res => {

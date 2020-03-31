@@ -35,20 +35,14 @@ const BalanceTouchable: props => React$Node = props => {
       .start()
       .then(() => console.log('Connection started!'))
       .catch(err => console.log('Error while establishing connection', err));
-
-    connectionHub.on('BattleHandler', (nick, message) => {
-      const text = `${nick}: ${message}`;
-      const messages = this.state.messages.concat([text]);
-      this.setState({messages});
-    });
     onGetBattleMode(true);
     setTimeout(() => {
       connectionHub
-        .invoke('BattleHandler2', {
+        .invoke('BattleHandler', {
           PlayId,
           BattleLife,
           BattleStrength,
-          BattleMode:true,
+          BattleMode: true,
           Location,
         })
         .then(res => console.log('SENDTOCHANNEL INVOKED!' + res.data));
